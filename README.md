@@ -1,4 +1,4 @@
-Create an application in PHP 7.4 without using any framework, you can still use as much library is need it but no Framework.
+Create an application in PHP 7.4 without using any framework, you can still use as much library is need it but no Framework.	
 
 
 ### Considerations
@@ -73,7 +73,7 @@ All the duplicated transactions need to be logged in the filesystem as [Debug]
 
 ### Challenge 3
 
-Create a test script to push randomly 1,000,000 requests per minute to the `/transaction` endpoint. The code of the script is not required to have test coverage. 
+Create a test script to push randomly 1,000,000 requests per minute to the `/transactions` endpoint. The code of the script is not required to have test coverage. 
 
 
 ### Wrapping up
