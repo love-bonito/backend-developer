@@ -45,7 +45,7 @@ Table Variants
 
  The entry point for our application will be an API endpoint which is going to be receiving a request in the [POST] `/transactions` these transactions are going to accept only POST requests. 
 
-The transaction will have the fields as are follows
+The transaction will accept the fields as are follows, all are mandatories.
 
 ```
 {
