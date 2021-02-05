@@ -81,7 +81,7 @@ In the README file, we should be able to find all the information necessary to r
 
 ### Delivery of the project
 
-Please share the URL of the repository with pablo.morales@lovebonito.com and aman.agarwal@lovebonito.com, remember to let Celeste (beverly.shaddick@lovebonito.com) know that you have finished the challenge.
+Please share the URL of the repository with pablo.morales@lovebonito.com and aman.agarwal@lovebonito.com, remember to let Beverly (beverly.shaddick@lovebonito.com) know that you have finished the challenge.
 
  
  
