@@ -1,90 +1,104 @@
-Create an application in PHP 7.4 without using any framework, you can still use as much library is need it but no Framework.	
+At Love, Bonito, we are looking for Backend developers that show PHP proficiency using all the good practices. You can use https://phptherightway.com/ for reference. 
 
 
 ### Considerations
 
-- Every piece of code need to have a unit test, code coverage needs to be close to 100%
-- Every functionality, need to have a functional/integration test. 
-- The documentation starting on the README.md file need to be clear
-- Use docker to spin up the application and docker-compose for all the services need it 
-- Is up to you to choose, webserver, Message Broker, and DB
+- Every piece of code needs to have a unit test. Code coverage needs to be close to 100%
+- Every functionality needs to have a functional/integration test. 
+- The documentation needs to be precise and tidy. You can use Markdown and save it on the `doc` folder
+- Use Docker to spin up the application and docker-compose for all the services need it 
+- We pre-install some libraries, but you don't necessarily need to use all of them
+- Codeception is an excellent tool for testing, but you can use plain PHPUnit if you feel uncomfortable.
+
+
 
 
 ### Context
-We need to create an application that will receive between 100,000 and 1,000,0000 transactions per minute. 
 
-Every transaction is going to happen in a different request, so this means that we can receive up to 1,000,000 different requests per minute. 
-
-Our application should be able to handle all these hits, without hesitation. 
-
-On the other side, our application has a small database with all the products and variants, our Database looks like this
-
-Our DB consists of 2 tables.
-
-Table Products
-
-```
-- ID {UUID}
-- SKU {INTEGER}
-- TITLE {String}
-- CREATED_AT
-- UPDATED_AT
-```
-
-Table Variants
-
-```
-- ID {UUID}
-- COLOR {STRING}
-- SIZE {STRING}
-```
+City information doesn't change often, but anyways to avoid any inconvenience with our Logistics carrier. We update the content as soon we have a chance. 
 
 
-
-### Challenge 1 
-
- The entry point for our application will be an API endpoint which is going to be receiving a request in the [POST] `/transactions` these transactions are going to accept only POST requests. 
-
-The transaction will accept the fields as are follows, all are mandatories.
-
-```
-{
-  "id": {UUID},
-  "sku": {integer},
-  "variant_id": {UUID},
-  "title": {string},
-}
-```
+There are two ways that we can receive the updates of the cities. 
 
 
-These values need to be first pushed to a queue system and leave it there. Remember that your API should return proper HTTP Response code, and messages. 
-
-### Challenge 2
-
-Create a daemon that processes every transaction in the queue, and try to save it in our DB. So far every transaction was stored in the queue system, and now we need to integrate it into our DB. 
-
-We mustn't duplicate products or variants. The `SKU` is a unique value for every product, and `Color` and `Size` are unique for variants. 
-
-> Even if the Color and Size are repeated, a Variant cannot be shared with other products. One product can have more than one variant, but a variant cannot be shared with more than one product. 
+1- As a CSV file with all the cities.
+2- As an API request, one request for each city
 
 
-All the duplicated transactions need to be logged in the filesystem as [Debug]
+In the case of the CSV file, we will place it manually in storage/worldcities.csv
+
+
+We pre-install some libraries to help you out on the initial setup. The use of those libraries is not mandatory. Still, you cannot use any other framework like Laravel or Lumen.
+
+It's essential to understand unit tests and functional tests. Both are being required for the Challenge. We will not consider tests without them. 
+
+
+### We recommend 
+- Use Tactician and follow the Command Bus Pattern
+- Testing is crucial for us. Try to solve the Challenges using TDD 
+
+
+--
+
+
+### Challenge 1
+
+Dockerize the application in the simplest way possible. Do not use external services. Just a simple docker-compose.yml will do the job.
+
+
+**Acceptance Criteria**
+
+- The application should spin up simply doing `docker-compose up -d'
+- I should be able to access the API and all the commands using Docker
+
+
+### Challenge 2 
+
+Whenever the file storage/worldcities.csv changes, we should update accordingly.
+
+We need to detect as soon as possible any change on the worldcities.csv file and save the latest information in storage/cities.csv 
+
+Cities.csv will contain all the updated information but just the Cities from ASEAN countries, Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, The Philippines, Singapore, Thailand, and Vietnam.
+
+**Acceptance Criteria**
+
+- The process shouldn't be executed if the file worldcities.csv doesn't change
+- The final will only contain the cities from ASEAN countries
+- The process should be as fast as possible
+- I should be able to execute the script with one line using docker like 
+	`$ docker exec -t {ContainerName} php folder/fileName.php {?params}`
+
 
 
 ### Challenge 3
 
-Create a test script to push randomly 1,000,000 requests per minute to the `/transactions` endpoint. The code of the script is not required to have test coverage. 
+Another way to update cities is through the API. We need to make an API endpoint PUT `/cities/{city_id}/` 
 
+This method will get only one city at a time. 
 
-### Wrapping up
-In the README file, we should be able to find all the information necessary to run the project, the different challenges, and the test. Documentation is highly important for the resolution of this Challenge.
+Remember that you will save information in storage/cities.csv
+
+**Acceptance Criteria**
+
+- Lookout to don't overlap the saving of the cities with another request or even with Challenge 1
+
+- A proper test will be run in parallel 1000 updates for different cities and update the worldcities.csv file at the same time, and nothing should overlap
+
+--
 
 ### Delivery of the project
 
-Please share the URL of the repository with pablo.morales@lovebonito.com and aman.agarwal@lovebonito.com, remember to let Beverly (beverly.shaddick@lovebonito.com) know that you have finished the challenge.
+Please share the repository URL with pablo.morales@lovebonito.com and aman.agarwal@lovebonito.com. Remember to let Beverly (beverly.shaddick@lovebonito.com) know that you have finished the Challenge.
 
  
  
 
 
+### Other references
 
+- Slim 4 https://www.slimframework.com/docs/v4/
+- Codeception https://codeception.com/
+- PHP League https://thephpleague.com/
+- Tactician https://tactician.thephpleague.com/
+- CSV Lib https://csv.thephpleague.com/
+- PHP Container https://container.thephpleague.com/
