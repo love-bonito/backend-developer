@@ -21,8 +21,9 @@ City information doesn't change often, but anyways to avoid any inconvenience wi
 There are two ways that we can receive the updates of the cities. 
 
 
-1- As a CSV file with all the cities.
-2- As an API request, one request for each city
+
+1. As a CSV file with all the cities.
+2. As an API request, one request for each city
 
 
 In the case of the CSV file, we will place it manually in storage/worldcities.csv
@@ -38,7 +39,7 @@ It's essential to understand unit tests and functional tests. Both are being req
 - Testing is crucial for us. Try to solve the Challenges using TDD 
 
 
---
+
 
 
 ### Challenge 1
@@ -84,7 +85,6 @@ Remember that you will save information in storage/cities.csv
 
 - A proper test will be run in parallel 1000 updates for different cities and update the worldcities.csv file at the same time, and nothing should overlap
 
---
 
 ### Delivery of the project
 
